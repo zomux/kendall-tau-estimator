@@ -25,7 +25,7 @@ public:
 
 private:
 
-    IntList taus;
+    IntList taus_;
     IntList ExtractAlignment(string line);
 };
 

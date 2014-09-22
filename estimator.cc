@@ -43,15 +43,15 @@ double KendallTauEstimator::EstimateOneLine(string line) {
 }
 
 void KendallTauEstimator::FeedOneLine(string line) {
-    taus.push_back(EstimateOneLine(line));
+    taus_.push_back(EstimateOneLine(line));
 }
 
 double KendallTauEstimator::Average() {
-    if (taus.size() == 0) {
+    if (taus_.size() == 0) {
         return 0;
     } else {
-        double sum = accumulate(taus.begin(), taus.end(), 0);
-        double average = sum / taus.size();
+        double sum = accumulate(taus_.begin(), taus_.end(), 0);
+        double average = sum / taus_.size();
         return average;
     }
 }

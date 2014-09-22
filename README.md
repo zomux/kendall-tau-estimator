@@ -8,7 +8,7 @@ How to install
 ---
 
 ```bash
-Cmake
+cmake
 make
 ```
 

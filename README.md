@@ -4,7 +4,7 @@ Kendall's Tau Estimator
 
 Estimate Kendall's Tau on a alignment file for evaluate reordering results for Statistical Machine Translation systems.
 
-How to install
+How to build
 ---
 
 ```bash

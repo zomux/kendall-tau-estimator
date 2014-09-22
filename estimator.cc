@@ -4,7 +4,7 @@ using namespace std;
 
 IntList KendallTauEstimator::ExtractAlignment(string line) {
     IntList alignments;
-    boost::regex partition_regex(".+? \\(\\{ ([0-9 ]+) \\}\\)");
+    boost::regex partition_regex(".+? \\(\\{ ([0-9]+) \\}\\)");
 
     boost::sregex_iterator regex_it(line.begin(), line.end(), partition_regex);
     boost::sregex_iterator end;
@@ -14,11 +14,8 @@ IntList KendallTauEstimator::ExtractAlignment(string line) {
         match = *(regex_it);
         string aligned_parts_str = match[1].str();
         boost::trim(aligned_parts_str);
-        StringList aligned_parts;
-        boost::split(aligned_parts, aligned_parts_str, boost::is_space());
-        BOOST_FOREACH (string part, aligned_parts) {
-            alignments.push_back(atoi(part.c_str()));
-        }
+        if (aligned_parts_str.size() == 0) continue;
+        alignments.push_back(atoi(aligned_parts_str.c_str()));
     }
     return alignments;
 }
@@ -38,7 +35,13 @@ double KendallTauEstimator::EstimateOneLine(string line) {
             all_count += 1;
         }
     }
-    double tau = 2.0 * concordant_num / all_count - 1;
+    double tau;
+    if (all_count == 0) {
+        tau = 0;
+    } else {
+        tau = 2.0 * concordant_num / all_count - 1.0;
+    }
+
     return tau;
 }
 
@@ -47,10 +50,11 @@ void KendallTauEstimator::FeedOneLine(string line) {
 }
 
 double KendallTauEstimator::Average() {
+
     if (taus_.size() == 0) {
         return 0;
     } else {
-        double sum = accumulate(taus_.begin(), taus_.end(), 0);
+        double sum = accumulate(taus_.begin(), taus_.end(), 0.0);
         double average = sum / taus_.size();
         return average;
     }

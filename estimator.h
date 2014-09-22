@@ -12,9 +12,8 @@
 using namespace std;
 
 typedef vector<int> IntList;
+typedef vector<double> DoubleList;
 typedef vector<string> StringList;
-typedef boost::tuple<int, int> IntPair;
-typedef vector<IntPair> IntPairList;
 
 class KendallTauEstimator {
 
@@ -25,7 +24,7 @@ public:
 
 private:
 
-    IntList taus_;
+    DoubleList taus_;
     IntList ExtractAlignment(string line);
 };
 

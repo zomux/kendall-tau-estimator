@@ -8,7 +8,7 @@ How to build
 ---
 
 ```bash
-cmake
+cmake CMakeLists.txt
 make
 ```
 
